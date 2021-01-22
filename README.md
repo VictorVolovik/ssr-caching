@@ -1,18 +1,39 @@
-# Example app where it caches SSR'ed pages in the memory
+# Next.js SSR caching of pages to Redis
 
-React Server Side rendering is very costly and takes a lot of server's CPU power for that. One of the best solutions for this problem is cache already rendered pages.
-That's what this example demonstrate.
+Example is based on official [example app](https://github.com/vercel/next.js/tree/canary/examples/ssr-caching), wich illustrates cachng of pages in the memory.
+On the moment of writing this example doesn't work with latest Next.js version.
+There is [opem PR](https://github.com/vercel/next.js/pull/18786/files) to fix this issue. All changes are used in this example.
 
-This app uses Next's [custom server and routing](https://nextjs.org/docs/advanced-features/custom-server) mode. It also uses [express](https://expressjs.com/) to handle routing and page serving.
+## Prerequisites
 
-## How to use
+Node.js >= 12
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+NPM >= 6
+
+Redis >= 6
+
+## Installation
+
+1. Install dependencies
 
 ```bash
-npx create-next-app --example ssr-caching ssr-caching-app
-# or
-yarn create next-app --example ssr-caching ssr-caching-app
+npm install
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+2. Create `.env` file in the root of the project using `.default_env` as example
+
+3. Start project
+
+for dev mode
+
+```bash
+npm run dev
+```
+
+4. For production verion use
+
+```bash
+npm run build && npm start
+
+```
+

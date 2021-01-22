@@ -1,6 +1,8 @@
 const cacheableResponse = require('cacheable-response')
 const express = require('express')
 const next = require('next')
+const Keyv = require("keyv");
+const KeyvRedis = require("@keyv/redis");
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
@@ -8,21 +10,25 @@ const app = next({ dev })
 
 const handle = app.getRequestHandler()
 
+const keyvRedis = new KeyvRedis("redis://localhost:6379")
+
 const ssrCache = cacheableResponse({
   ttl: 1000 * 60 * 60, // 1hour
+  cache: new Keyv({ store: keyvRedis }),
   get: async ({ req, res }) => {
-    const data = await app.render(req, res, req.path, {
-      ...req.query,
-      ...req.params,
+    const rawResEnd = res.end;
+
+    const data = await new Promise(resolve => {
+      res.end = payload => {
+        resolve(res.statusCode === 200 && payload)
+      }
+      app.render(req, res, req.path, {
+        ...req.query,
+        ...req.params,
+      })
     })
 
-    // Add here custom logic for when you do not want to cache the page, for
-    // example when the page returns a 404 status code:
-    if (res.statusCode === 404) {
-      res.end(data)
-      return
-    }
-
+    res.end = rawResEnd;
     return { data }
   },
   send: ({ data, res }) => res.send(data),
