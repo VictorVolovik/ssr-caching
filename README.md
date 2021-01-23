@@ -2,7 +2,7 @@
 
 Example is based on official [example app](https://github.com/vercel/next.js/tree/canary/examples/ssr-caching), wich illustrates cachng of pages in the memory.
 On the moment of writing this example doesn't work with latest Next.js version.
-There is [opem PR](https://github.com/vercel/next.js/pull/18786/files) to fix this issue. All changes from PR are used in this example.
+There is [open PR](https://github.com/vercel/next.js/pull/18786/files) to fix this issue. All changes from PR are used in this example.
 
 ## Prerequisites
 
@@ -16,20 +16,19 @@ Redis >= 6
 
 1. Install dependencies
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
-2. Start project in dev mode
+1. Start project in dev mode
 
-```bash
-npm run dev
-```
+   ```bash
+   npm run dev
+   ```
 
-3. For production verion use
+1. For production verion use
 
-```bash
-npm run build && npm start
+   ```bash
+   npm run build && npm start
 
-```
-
+   ```
