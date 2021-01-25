@@ -32,3 +32,11 @@ Redis >= 6
    npm run build && npm start
 
    ```
+ 
+## Additional note
+
+Check [cacheable-response documentation](https://www.npmjs.com/package/cacheable-response) for more options.
+
+In case you need you can force invalidate a cache response passing force=true as part of your query parameters.
+
+Example: `localhost:3000/blog/first?force=true`
